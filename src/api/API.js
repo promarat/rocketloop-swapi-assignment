@@ -21,12 +21,12 @@ const FILM_URLS = [
   'films/',
 ];
 
-const STARSHIP_URLS = [
-  'starships/?page=1',
-  'starships/?page=2',
-  'starships/?page=3',
-  'starships/?page=4',
-];
+// const STARSHIP_URLS = [
+//   'starships/?page=1',
+//   'starships/?page=2',
+//   'starships/?page=3',
+//   'starships/?page=4',
+// ];
 
 const SPECIES_URLS = [
   'species/?page=1',
@@ -42,7 +42,9 @@ export const getPeoples = async () => {
         if (res.status === 200) {
           return res.data.results.map(people => {
             const { name, birth_year, films, species, starships, url } = people;
-            return { name, birth_year, films, species, starships, url };
+            const peopleUrl = BASE_URL + '/people/';
+            const id = url.substring(peopleUrl.length - 1, url.length - 1);
+            return { id, name, birth_year, films, species, starships, url };
           });
         } else {
           return [];
@@ -52,6 +54,19 @@ export const getPeoples = async () => {
     return response.flat();
   } catch (error) {
     console.error('Error', error);
+  }
+}
+
+export const getPeople = async (id) => {
+  try {
+    return await swapi.get(`people/${id}`).then(res => {
+      if (res.status === 200) {
+        const { name, birth_year, films, species, starships, url } = res.data;
+        return { id, name, birth_year, films, species, starships, url };
+      }
+    });
+  } catch (error) {
+    console.error(error);
   }
 }
 
@@ -75,21 +90,21 @@ export const getFilms = async () => {
   }
 }
 
-export const getStarships = async () => {
+export const getStarships = async (urls) => {
   try {
     const response = await Promise.all(
-      STARSHIP_URLS.map(url => swapi.get(url).then(res => {
-        if (res.status === 200) {
-          return res.data.results.map(species => {
-            const { name, url } = species;
-            return { name, url };
-          });
-        } else {
-          return [];
-        }
-      }))
+      urls.map(url => {
+        const newUrl = url.includes(BASE_URL) ? url.substring(BASE_URL.length) : url;
+        return swapi.get(newUrl).then(res => {
+          if (res.status === 200) {
+            return res.data.name;
+          } else {
+            return '';
+          }
+        });
+      })
     );
-    return response.flat();
+    return response;
   } catch (error) {
     console.error('Error', error);
   }

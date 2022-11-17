@@ -16,7 +16,7 @@ export const intToRoman = (num) => {
   };
   let result = '';
   
-  for (key in map) {  
+  for (let key in map) {  
     const repeatCounter = Math.floor(num / map[key]);
     
     if (repeatCounter !== 0) {

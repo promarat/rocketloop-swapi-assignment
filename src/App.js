@@ -13,8 +13,10 @@ const App = (props) => {
   const { setFilms, setSpecies } = props;
 
   useEffect(() => {
-    setFilms();
-    setSpecies();
+    const dispatchData = async () => {
+      Promise.all([setFilms(), setSpecies()]);
+    }
+    dispatchData();
   }, [setFilms, setSpecies]);
 
   return (
@@ -35,4 +37,3 @@ const mapDispatchToProps = {
   setSpecies,
 }
 export default connect(null, mapDispatchToProps)(App);
-

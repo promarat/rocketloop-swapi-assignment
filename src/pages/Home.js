@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import SelectSearch from 'react-select-search';
 import 'react-select-search/style.css';
 import Spinner from '../components/Spinner';
@@ -21,8 +22,13 @@ const Home = (props) => {
   });
 
   useEffect(() => {
-    setPeoples();
-  }, [setPeoples]);
+    const fetchData = async () => {
+      await setPeoples();
+    }
+    if (peoples.length === 0) {
+      fetchData();
+    }
+  }, [peoples, setPeoples]);
 
   if (peoples.length === 0
     || films.length === 0
@@ -54,13 +60,14 @@ const Home = (props) => {
         </div>
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-        {peoples.map((people, index) => (
-          <button
-            key={`people-${index}`}
-            className="border rounded-[.5rem] py-2"
+        {peoples.map(people => (
+          <Link
+            key={`people-${people.id}`}
+            to={`/character/${people.id}`}
+            className="border rounded-[.5rem] text-center py-2"
           >
             {people.name}
-          </button>
+          </Link>
         ))}
       </div>
     </div>
