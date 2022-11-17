@@ -53,9 +53,12 @@ const Home = (props) => {
         }
         if (selectedRange === null) return false;
         const birthYear = yearToInt(people.birth_year);
-        if (birthYear === null
-          || (selectedRange.min !== null && birthYear < selectedRange.min)
-          || (selectedRange.max !== null && birthYear > selectedRange.max)
+        if (birthYear === null && (selectedRange.min !== null || selectedRange.max !== null)) {
+          return false;
+        }
+        if (birthYear !== null &&
+          ((selectedRange.min !== null && birthYear < selectedRange.min)
+          || (selectedRange.max !== null && birthYear > selectedRange.max))
         ) {
           return false;
         }
