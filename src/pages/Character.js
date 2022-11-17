@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Link, useNavigate } from 'react-router-dom';
 import Spinner from '../components/Spinner';
 import { getPeople, getStarships } from '../api/API';
-import { intToRoman } from '../utils/romanUtils';
+import { intToRoman } from '../utils/swUtils';
 
 const Character = (props) => {
   const { peoples, films, species } = props;
