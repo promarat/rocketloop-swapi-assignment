@@ -78,7 +78,7 @@ const Home = (props) => {
     <div className="container mx-auto px-8 py-4">
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4 mb-8">
         <div className="flex items-center gap-4">
-          <label className="w-[84px]">Movie</label>
+          <label className="w-[7.5rem]">Movie</label>
           <SelectSearch
             options={filmOptions}
             name="films"
@@ -89,7 +89,7 @@ const Home = (props) => {
           />
         </div>
         <div className="flex items-center gap-4">
-          <label className="w-[84px]">Species</label>
+          <label className="w-[7.5rem]">Species</label>
           <SelectSearch
             options={speciesOptions}
             name="species"
@@ -100,7 +100,7 @@ const Home = (props) => {
           />
         </div>
         <div className="flex items-center gap-4">
-          <label className="w-[84px]">Birth Year</label>
+          <label className="w-[8rem]">Birth Year</label>
           <YearRange onChange={setSelectedRange} />
         </div>
       </div>

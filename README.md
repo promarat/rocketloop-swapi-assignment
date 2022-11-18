@@ -4,6 +4,9 @@ In this assignment, you will be building a small front-end application that disp
 ## App Overview
 The app will consist of a main view that will display the list of characters and a filter section, where the user can filter the characters by certain criteria. Clicking on one of the characters from the list will open a detail view of this character. When the user changes the filter settings in the filter section, the list of characters should instantly adapt to only show characters that match the chosen filter settings.
 
+### Live url
+https://roketloop-swapi-assignment.web.app/
+
 ### Character List
 The character list should be a simple list that displays the name of the character. Each list entry should be clickable and open the detail view for the selected character when the user clicks the list entry.
 
